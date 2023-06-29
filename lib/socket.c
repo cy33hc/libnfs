@@ -23,6 +23,10 @@
 #include "aros_compat.h"
 #endif
 
+#ifdef __vita__
+#include "vita_compat.h"
+#endif
+
 #ifdef PS2_EE
 #include "ps2_compat.h"
 #endif
@@ -773,7 +777,7 @@ rpc_connect_sockaddr_async(struct rpc_context *rpc)
 	}
 
 	if (rpc->old_fd) {
-#if !defined(WIN32) && !defined(PS3_PPU) && !defined(PS2_EE)
+#if !defined(WIN32) && !defined(PS3_PPU) && !defined(PS2_EE) && !defined(__vita__)
 		if (dup2(rpc->fd, rpc->old_fd) == -1) {
 			return -1;
 		}

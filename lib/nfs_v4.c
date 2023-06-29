@@ -30,6 +30,10 @@
 #include "aros_compat.h"
 #endif
 
+#ifdef __vita__
+#include "vita_compat.h"
+#endif
+
 #ifdef PS2_EE
 #include "ps2_compat.h"
 #endif
@@ -438,7 +442,7 @@ nfs_get_ugid(struct nfs_context *nfs, const char *buf, int slen, int is_user)
                         ugid *= 10;
                         ugid += *buf - '0';
                 } else {
-#ifdef HAVE_GETPWNAM
+#if defined(HAVE_GETPWNAM) && !defined(__vita__)
                         struct passwd *pwd = getpwnam(name);
                         if (pwd) {
                                 if (is_user) {

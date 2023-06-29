@@ -12,6 +12,7 @@ libnfs_la_CPPFLAGS = -I$(abs_top_srcdir)/include \
 		     -I$(abs_top_srcdir)/portmap \
 		     -I$(abs_top_srcdir)/rquota \
 		     -I$(abs_top_srcdir)/win32 \
+			 -I$(abs_top_srcdir)/vita \
 		     "-D_U_=__attribute__((unused))"
 
 libnfs_la_SOURCES = \
@@ -24,7 +25,8 @@ libnfs_la_SOURCES = \
 	nfs_v4.c \
 	pdu.c \
 	socket.c \
-	../win32/win32_compat.c
+	../win32/win32_compat.c \
+	../vita/vita_compat.c
 
 SOCURRENT=14
 SOREVISION=0

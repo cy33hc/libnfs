@@ -43,6 +43,10 @@
 #define IFNAMSIZ 16
 #endif
 
+#if defined(__vita__) && !defined(IFNAMSIZ)
+#define IFNAMSIZ 16
+#endif
+
 #include "libnfs-multithreading.h"
 #include "libnfs-zdr.h"
 #include "../nfs/libnfs-raw-nfs.h"

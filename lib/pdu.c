@@ -23,6 +23,10 @@
 #include "aros_compat.h"
 #endif
 
+#ifdef __vita__
+#include "vita_compat.h"
+#endif
+
 #ifdef PS2_EE
 #include "ps2_compat.h"
 #endif

@@ -38,6 +38,10 @@
 #include <win32/win32_compat.h>
 #endif
 
+#ifdef __vita__
+#include "vita_compat.h"
+#endif
+
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
@@ -2605,7 +2609,7 @@ send_nfsd_probes(struct rpc_context *rpc, struct ifconf *ifc,
 		if (ifr.ifr_addr.sa_family != AF_INET) {
 			continue;
 		}
-#ifndef PS3_PPU
+#if !defined(PS3_PPU) && !defined(__vita__)
 		if (ioctl(rpc_get_fd(rpc), SIOCGIFFLAGS, &ifr) < 0) {
 			return -1;
 		}
@@ -2619,7 +2623,7 @@ send_nfsd_probes(struct rpc_context *rpc, struct ifconf *ifc,
 		if (!(ifr.ifr_flags & IFF_BROADCAST)) {
 			continue;
 		}
-#ifndef PS3_PPU
+#if !defined(PS3_PPU) && !defined(__vita__)
 		if (ioctl(rpc_get_fd(rpc), SIOCGIFBRDADDR, &ifr) < 0) {
 			continue;
 		}
@@ -2675,7 +2679,7 @@ nfs_find_local_servers(void)
 		ifc.ifc_len = size;
 		ifc.ifc_buf = malloc(size);
 		memset(ifc.ifc_buf, 0, size);
-#ifndef PS3_PPU
+#if !defined(PS3_PPU) && !defined(__vita__)
 		if (ioctl(rpc_get_fd(rpc), SIOCGIFCONF, (caddr_t)&ifc) < 0) {
 			rpc_destroy_context(rpc);
 			free(ifc.ifc_buf);

@@ -30,6 +30,10 @@
 #include "aros_compat.h"
 #endif
 
+#ifdef __vita__
+#include "vita_compat.h"
+#endif
+
 #ifdef PS2_EE
 #include "ps2_compat.h"
 #endif
@@ -40,6 +44,10 @@
 
 #ifdef WIN32
 #include <win32/win32_compat.h>
+#endif
+
+#ifdef __vita__
+#include <sys/types.h>
 #endif
 
 #ifdef HAVE_UTIME_H
