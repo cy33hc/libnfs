@@ -103,7 +103,7 @@
 #endif
 
 #ifndef MSG_NOSIGNAL
-#if (defined(__APPLE__) && defined(__MACH__)) || defined(PS2_EE)
+#if (defined(__APPLE__) && defined(__MACH__)) || defined(PS2_EE) || defined(__vita__)
 #define MSG_NOSIGNAL 0
 #endif
 #endif
@@ -843,7 +843,7 @@ rpc_connect_sockaddr_async(struct rpc_context *rpc)
                                                 sizeof(struct sockaddr_in);
 #endif
 					break;
-#if !defined(PS3_PPU) && !defined(PS2_EE)
+#if !defined(PS3_PPU) && !defined(PS2_EE) && !defined(__vita__)
 				case AF_INET6:
 					sin6->sin6_port = port;
 					sin6->sin6_family = AF_INET6;
@@ -901,7 +901,7 @@ rpc_set_sockaddr(struct rpc_context *rpc, const char *server, int port)
                         sizeof(struct sockaddr_in);
 #endif
 		break;
-#if !defined(PS3_PPU) && !defined(PS2_EE)
+#if !defined(PS3_PPU) && !defined(PS2_EE) && !defined(__vita__)
 	case AF_INET6:
 		((struct sockaddr_in6 *)&rpc->s)->sin6_family = ai->ai_family;
 		((struct sockaddr_in6 *)&rpc->s)->sin6_port = htons(port);
