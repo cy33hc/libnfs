@@ -43,7 +43,7 @@
 #include <sys/socket.h>
 #endif
 
-#if defined(HAVE_SYS_UIO_H) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(HAVE_SYS_UIO_H) || (defined(__APPLE__) && defined(__MACH__)) || defined(__PS5__)
 #include <sys/uio.h>
 #endif
 
