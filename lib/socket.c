@@ -864,7 +864,11 @@ rpc_connect_sockaddr_async(struct rpc_context *rpc)
 
 	rpc->is_nonblocking = !set_nonblocking(rpc->fd);
 	set_nolinger(rpc->fd);
-
+#if defined(__PS4__) || defined(__PS5__)
+        int size = 1048576;
+        setsockopt(rpc->fd, SOL_SOCKET, SO_SNDBUF, &size, sizeof(size));
+        setsockopt(rpc->fd, SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
+#endif
 	if (connect(rpc->fd, (struct sockaddr *)s, socksize) != 0 &&
             errno != EINPROGRESS) {
 		rpc_set_error(rpc, "connect() to server failed. %s(%d)",
